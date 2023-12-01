@@ -1,8 +1,8 @@
 function dodaj( obj, tab){
    let query = "insert info"+tab;
    query+= "(imie,nazwisko,plec,data,cokolwiek)";
-   query+= obj.imie;
-   query+= obj.nazwisko;
+   query+= obj.i;
+   query+= obj.n;
    query= "WHERE id="+id;
    RTCPeerConnection.query(query)
 
@@ -17,18 +17,6 @@ const connection = mysql.createConnection({
   database: 'test'
 });
 
-function aktaualizuj(id,obj,tab,war) {
-  connection.query(query);
-  let query='UPDATE'+tab
-  if(war){
-    query+='WHERE id='+id; 
-  }
-  query+="(imie,nazwisko,plec,data,cokolwiek)";
-  query+="VALUES(";
-  query+=obj.imie;
-  query+=obj.nazwisko;
-  query+=")";   
-}
 
 function usun(id,tab){
   connection.query(query);
@@ -41,7 +29,19 @@ function pobierz(parametr,tab) {
     parametr = 'WHERE `name` = "Page" AND `age` > 45';
   }
 
- let query = 'SELECT * FROM ' +tab+ 'parametr';  
+ function aktaualizuj(id,obj,tab,war) {
+  connection.query(query);
+  let query='UPDATE'+tab
+  if(war){
+    query+='WHERE id='+id; 
+  }
+  query+="(imie,nazwisko,plec,data,cokolwiek)";
+  query+="VALUES(";
+  query+=obj.i;
+  query+=obj.n;
+  query+=")";   
+}
+   let query = 'SELECT * FROM ' +tab+ 'parametr';  
   connection.query()
       query,
       function(err, results, fields) {
